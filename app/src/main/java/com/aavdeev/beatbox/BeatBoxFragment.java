@@ -14,6 +14,7 @@ public class BeatBoxFragment extends Fragment {
         return new BeatBoxFragment();
     }
 
+    
 //Преопределяем метод создания виью
     @Nullable
     @Override
