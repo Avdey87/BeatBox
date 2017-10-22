@@ -11,12 +11,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class BeatBoxFragment extends Fragment {
+    private BeatBox mBeatBox;
     public static BeatBoxFragment newInstance() {
         return new BeatBoxFragment();
     }
 
 
-//Преопределяем метод создания виью
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mBeatBox = new BeatBox(getActivity());
+    }
+
+    //Преопределяем метод создания виью
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
