@@ -40,7 +40,7 @@ public class BeatBoxFragment extends Fragment {
        //указываем что сетка состоит из 3х столбцов
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         //подключаем SoundAdapter
-        recyclerView.setAdapter(new SoundAdapter());
+        recyclerView.setAdapter(new SoundAdapter(mBeatBox.getSound()));
         return view;
     }
 
