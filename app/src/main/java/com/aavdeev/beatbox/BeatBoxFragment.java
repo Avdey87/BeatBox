@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.List;
+
 public class BeatBoxFragment extends Fragment {
     private BeatBox mBeatBox;
     public static BeatBoxFragment newInstance() {
@@ -45,6 +47,7 @@ public class BeatBoxFragment extends Fragment {
     //Создаем внутренний класс для отображение активности и кнопки на ней
     private class SoundHolder extends RecyclerView.ViewHolder {
         private Button mButton;
+        private Sound mSound;
 
         //Конструктор класс. В нем два параметра типа LayoutInflater и ViewGroup
         //т.е. LayoutInflater тип переменной для программмного создание лайоут объекта, ViewGroup переменная для создание объекта типа вью
@@ -54,10 +57,23 @@ public class BeatBoxFragment extends Fragment {
 // определяем кнпку в созданной вью
             mButton = (Button) itemView.findViewById(R.id.list_item_sound_button);
         }
+
+        //Связываем обьект Sound
+// метод устанавливат звук на кнопку
+        public void bindSound(Sound sound) {
+            mSound = sound;
+            //установить текс (название звука) на кнопку
+            mButton.setText(mSound.getName());
+        }
     }
 
     //Создаем адаптер связанный с SoundHolder
     private class SoundAdapter extends RecyclerView.Adapter<SoundHolder> {
+        private List<Sound> mSound;
+//связываем адаптер с объектом Sound
+        public SoundAdapter(List<Sound> sounds) {
+            mSound = sounds;
+        }
 
         @Override
         public SoundHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -67,12 +83,13 @@ public class BeatBoxFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(SoundHolder holder, int position) {
-
+            Sound sound = mSound.get(position);
+            holder.bindSound(sound);
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mSound.size();
         }
     }
 
