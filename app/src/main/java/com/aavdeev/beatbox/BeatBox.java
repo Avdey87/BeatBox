@@ -12,10 +12,12 @@ import java.util.List;
 public class BeatBox {
     private static final String TAG = "BeatBox";
     private static final String SOUND_FOLDER = "sample_sound";
+
     //AssetManager класс для обращения к активам
     private AssetManager mAssets;
     private List<Sound> mSound = new ArrayList<>();
-//конструктор класса который получает Context и извлекает AssetManager и сохраняет его на будущее
+
+    //конструктор класса который получает Context и извлекает AssetManager и сохраняет его на будущее
     public BeatBox(Context context) {
         mAssets = context.getAssets();
     }
@@ -42,7 +44,7 @@ public class BeatBox {
             String assestPath = SOUND_FOLDER + "/" + filename;
             //создаем переменную типа Sound и записываем внее путь к звуку
             Sound sound = new Sound(assestPath);
-            //вносим путь в переменную
+            //вноси
             mSound.add(sound);
         }
     }
