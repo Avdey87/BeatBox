@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 //Класс для поиска отслеживание и воспроизведения звуков
 public class BeatBox {
@@ -12,6 +14,7 @@ public class BeatBox {
     private static final String SOUND_FOLDER = "sample_sound";
     //AssetManager класс для обращения к активам
     private AssetManager mAssets;
+    private List<Sound> mSound = new ArrayList<>();
 //конструктор класса который получает Context и извлекает AssetManager и сохраняет его на будущее
     public BeatBox(Context context) {
         mAssets = context.getAssets();
@@ -33,5 +36,19 @@ public class BeatBox {
             Log.e(TAG, "Could not list assests", e);
             return;
         }
+        //проходим по списку soundNames
+        for (String filename : soundNames) {
+            //каждый раз записывая в переменную путь к файллу
+            String assestPath = SOUND_FOLDER + "/" + filename;
+            //создаем переменную типа Sound и записываем внее путь к звуку
+            Sound sound = new Sound(assestPath);
+            //вносим путь в переменную
+            mSound.add(sound);
+        }
+    }
+
+    //геттер возвращает списо к звуков
+    public List<Sound> getSound() {
+        return mSound;
     }
 }
