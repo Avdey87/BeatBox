@@ -23,8 +23,14 @@ public class BeatBoxFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setRetainInstance(true);
         mBeatBox = new BeatBox(getActivity());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mBeatBox.release();
     }
 
     //Преопределяем метод создания виью
@@ -38,7 +44,7 @@ public class BeatBoxFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_beat_box, container, false);
         RecyclerView recyclerView = (RecyclerView) view
                 .findViewById(R.id.fragment_beat_box_recycler_view);
-       //указываем что сетка состоит из 3х столбцов
+        //указываем что сетка состоит из 3х столбцов
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         //подключаем SoundAdapter
         recyclerView.setAdapter(new SoundAdapter(mBeatBox.getSound()));
@@ -46,7 +52,7 @@ public class BeatBoxFragment extends Fragment {
     }
 
     //Создаем внутренний класс для отображение активности и кнопки на ней
-    private class SoundHolder extends RecyclerView.ViewHolder {
+    private class SoundHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Button mButton;
         private Sound mSound;
 
@@ -57,6 +63,7 @@ public class BeatBoxFragment extends Fragment {
             super(inflater.inflate(R.layout.list_item_sound, container, false));
 // определяем кнпку в созданной вью
             mButton = (Button) itemView.findViewById(R.id.list_item_sound_button);
+            mButton.setOnClickListener(this);
         }
 
         //Связываем обьект Sound
@@ -66,12 +73,18 @@ public class BeatBoxFragment extends Fragment {
             //установить текс (название звука) на кнопку
             mButton.setText(mSound.getName());
         }
+
+        @Override
+        public void onClick(View v) {
+            mBeatBox.play(mSound);
+        }
     }
 
     //Создаем адаптер связанный с SoundHolder
     private class SoundAdapter extends RecyclerView.Adapter<SoundHolder> {
         private List<Sound> mSound;
-//связываем адаптер с объектом Sound
+
+        //связываем адаптер с объектом Sound
         public SoundAdapter(List<Sound> sounds) {
             mSound = sounds;
         }

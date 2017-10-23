@@ -1,8 +1,19 @@
 package com.aavdeev.beatbox;
 
+import android.content.Intent;
+
 public class Sound {
     private String mAssetParh;
     private String mName;
+    private Integer mSoundId;
+
+    public Integer getSoundId() {
+        return mSoundId;
+    }
+
+    public void setSoundId(Integer soundId) {
+        this.mSoundId = soundId;
+    }
 
     public Sound(String assetParh) {
         mAssetParh = assetParh;
