@@ -11,7 +11,7 @@ import java.util.List;
 //Класс для поиска отслеживание и воспроизведения звуков
 public class BeatBox {
     private static final String TAG = "BeatBox";
-    private static final String SOUND_FOLDER = "sample_sound";
+    private static final String SOUND_FOLDER = "sample_sounds";
 
     //AssetManager класс для обращения к активам
     private AssetManager mAssets;
@@ -20,6 +20,7 @@ public class BeatBox {
     //конструктор класса который получает Context и извлекает AssetManager и сохраняет его на будущее
     public BeatBox(Context context) {
         mAssets = context.getAssets();
+        loadSound();
     }
 
     //метод для загрузки списка звуков

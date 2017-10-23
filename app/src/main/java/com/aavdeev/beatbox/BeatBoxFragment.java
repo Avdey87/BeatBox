@@ -54,7 +54,7 @@ public class BeatBoxFragment extends Fragment {
         //т.е. LayoutInflater тип переменной для программмного создание лайоут объекта, ViewGroup переменная для создание объекта типа вью
         public SoundHolder(LayoutInflater inflater, ViewGroup container) {
             //конструктор возвращает лайоут с ид list_item_sound и переданным в него ViewGroup параметром container, создаем вью программно
-            super(inflater.inflate(R.layout.list_item_sound, container));
+            super(inflater.inflate(R.layout.list_item_sound, container, false));
 // определяем кнпку в созданной вью
             mButton = (Button) itemView.findViewById(R.id.list_item_sound_button);
         }
